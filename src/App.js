@@ -1,4 +1,3 @@
-import "./App.css";
 import NavBar from "./components/NavBar";
 import Chart from "./Chart";
 import { Grid, Paper } from "@material-ui/core";
