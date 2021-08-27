@@ -22,15 +22,15 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 export default function Chart() {
   return (
-    <Box sx={{ padding: 4, margin: 5, mt: 2 }}>
-      <Grid container direction="column" spacing={1}>
+    <Box sx={{ mt: 3 }}>
+      <Grid container direction="column">
         <Grid item xs={12}>
           <Typography variant="h4" align="center">
             Summary
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <PieChart width={1000} height={400}>
+          <PieChart width={500} height={400}>
             <Pie
               alignmentBaseline="middle"
               dataKey="value"
@@ -53,7 +53,6 @@ export default function Chart() {
             <Legend layout="centric" verticalAlign="middle" align="center" />
           </PieChart>
         </Grid>
-        <Grid item sx={12}></Grid>
       </Grid>
     </Box>
   );

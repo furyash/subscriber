@@ -28,8 +28,11 @@ const SubscriberList = (props) => {
       <Dialog open={open} onClose={closeModal}>
         <DialogTitle>Subscription Detail</DialogTitle>
         <List>
-          <ListItem>Prop</ListItem>
-          <ListItem>Text</ListItem>
+          <ListItem>Name : Bhramha Dev</ListItem>
+          <ListItem>Active : No</ListItem>
+          <ListItem>Address : Swarga</ListItem>
+          <ListItem>Country : Dharti</ListItem>
+          <ListItem>Join Date : 00-00-00</ListItem>
         </List>
       </Dialog>
     </Box>

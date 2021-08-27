@@ -9,11 +9,14 @@ import {
   MenuItem,
   TextField,
   Grid,
+  Button,
 } from "@material-ui/core";
 import FilterListIcon from "@material-ui/icons/FilterList";
 
 const NavBar = (props) => {
   const [open, setOpen] = useState(null);
+  const [packageText, setPackageText] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
 
   const openFilterMenu = (event) => {
     setOpen(event.currentTarget);
@@ -24,15 +27,21 @@ const NavBar = (props) => {
   };
 
   const filterPackage = (event) => {
-    if (event.key === "Enter") {
-      closeFilterMenu();
-    }
+    // event.preventDefault();
+    setPackageText(event.target.value);
   };
 
   const filterDate = (event) => {
-    if (event.key === "Enter") {
-      closeFilterMenu();
-    }
+    event.preventDefault();
+    setExpiryDate(event.target.value);
+  };
+
+  const performFilter = (event) => {
+    event.preventDefault();
+    props.setFilter(JSON.stringify({ package: packageText, date: expiryDate }));
+    setPackageText("");
+    setExpiryDate("");
+    closeFilterMenu();
   };
 
   return (
@@ -47,6 +56,9 @@ const NavBar = (props) => {
           </Typography>
         </IconButton>
         <Menu
+          disableAutoFocus
+          disableAutoFocusItem
+          autoFocus={false}
           id="filter-menu"
           anchorEl={open}
           anchorOrigin={{
@@ -67,7 +79,14 @@ const NavBar = (props) => {
                 Package
               </Grid>
               <Grid item xs={8}>
-                <TextField id="package" onKeyPress={filterPackage} />
+                <TextField
+                  value={packageText}
+                  id="package"
+                  onChange={filterPackage}
+                  onKeyDown={(e) => {
+                    e.stopPropagation();
+                  }}
+                />
               </Grid>
             </Grid>
           </MenuItem>
@@ -77,7 +96,25 @@ const NavBar = (props) => {
                 Expiry
               </Grid>
               <Grid item xs={8}>
-                <TextField id="date" type="date" onKeyPress={filterDate} />
+                <TextField
+                  value={expiryDate}
+                  id="date"
+                  type="date"
+                  onChange={filterDate}
+                />
+              </Grid>
+            </Grid>
+          </MenuItem>
+          <MenuItem>
+            <Grid container spacing={0}>
+              <Grid item xs={8}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={performFilter}
+                >
+                  Filter
+                </Button>
               </Grid>
             </Grid>
           </MenuItem>
