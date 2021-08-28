@@ -11,6 +11,7 @@ import {
   Button,
 } from "@material-ui/core";
 import FilterListIcon from "@material-ui/icons/FilterList";
+import ClearIcon from "@material-ui/icons/Clear";
 
 const NavBar = (props) => {
   const [open, setOpen] = useState(null);
@@ -60,7 +61,7 @@ const NavBar = (props) => {
           <Typography variant="h6">Filter</Typography>
         </IconButton>
         <IconButton onClick={clearFilter}>
-          <FilterListIcon />
+          <ClearIcon />
           <Typography variant="h6">Clear</Typography>
         </IconButton>
         <Menu
