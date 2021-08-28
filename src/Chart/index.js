@@ -18,12 +18,26 @@ const data = [
   { name: "Plan Unlimited", value: 4800 },
 ];
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const COLORS = [
+  "#005FB1",
+  "#0088FE",
+  "#004437",
+  "#009175",
+  "#7F5D14",
+  "#CC9520",
+  "#B20036",
+  "#FF004E",
+  "#450086",
+  "#6D00D3",
+  "#CC5D27",
+  "#FF8042",
+  "#4C4C4C",
+];
 
 export default function Chart() {
   return (
-    <Box sx={{ mt: 3 }}>
-      <Grid container direction="column">
+    <Box sx={{ pt: 3, minWidth: "350px" }}>
+      <Grid container direction="column" alignItems="center">
         <Grid item xs={12}>
           <Typography variant="h4" align="center">
             Summary
@@ -36,17 +50,14 @@ export default function Chart() {
               dataKey="value"
               isAnimationActive={false}
               data={data}
-              cx={280}
-              cy={180}
+              cx="57%"
+              cy="50%"
               outerRadius={120}
               fill="#8884d8"
               label
             >
               {data.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
+                <Cell key={`cell-${index}`} fill={COLORS[index]} />
               ))}
             </Pie>
             <Tooltip />

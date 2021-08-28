@@ -1,35 +1,39 @@
 import NavBar from "./components/NavBar";
 import Chart from "./Chart";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid, Paper, Box, Divider } from "@material-ui/core";
 import SubscriberList from "./components/SubscriberList";
 import { useState } from "react";
 
 const App = () => {
   const [filter, setFilter] = useState(JSON.stringify({}));
   return (
-    <div>
+    <Box sx={{ m: 2 }}>
       <Grid
         container
         direction="row-reverse"
         spacing={2}
-        alignItems="baseline"
+        alignItems="flex-start"
         justifyContent="center"
       >
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} md={4}>
           <Chart />
+          <Divider />
         </Grid>
-        <Grid container direction="column" item xs={12} sm={8}>
+
+        <Grid container direction="column" item xs={12} md={8}>
           <Grid>
             <NavBar setFilter={setFilter} />
           </Grid>
           <Grid>
             <Paper>
-              <SubscriberList filter={JSON.parse(filter)} />
+              <Box style={{ maxHeight: "80vh", overflow: "auto" }}>
+                <SubscriberList filter={JSON.parse(filter)} />
+              </Box>
             </Paper>
           </Grid>
         </Grid>
       </Grid>
-    </div>
+    </Box>
   );
 };
 

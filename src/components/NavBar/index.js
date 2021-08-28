@@ -51,7 +51,7 @@ const NavBar = (props) => {
         <Box sx={{ flexGrow: 1 }}></Box>
         <IconButton aria-controls="filter-menu" onClick={openFilterMenu}>
           <FilterListIcon />
-          <Typography variant="h6" sx={{ p: 5 }}>
+          <Typography variant="h6" sx={{ p: 2 }}>
             Filter
           </Typography>
         </IconButton>
