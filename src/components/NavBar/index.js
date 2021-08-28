@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  AppBar,
   IconButton,
   Toolbar,
   Typography,
@@ -43,6 +42,13 @@ const NavBar = (props) => {
     setExpiryDate("");
     closeFilterMenu();
   };
+  const clearFilter = (event) => {
+    event.preventDefault();
+    setPackageText("");
+    setExpiryDate("");
+    props.setFilter(JSON.stringify({ package: packageText, date: expiryDate }));
+    closeFilterMenu();
+  };
 
   return (
     <div>
@@ -51,9 +57,11 @@ const NavBar = (props) => {
         <Box sx={{ flexGrow: 1 }}></Box>
         <IconButton aria-controls="filter-menu" onClick={openFilterMenu}>
           <FilterListIcon />
-          <Typography variant="h6" sx={{ p: 2 }}>
-            Filter
-          </Typography>
+          <Typography variant="h6">Filter</Typography>
+        </IconButton>
+        <IconButton onClick={clearFilter}>
+          <FilterListIcon />
+          <Typography variant="h6">Clear</Typography>
         </IconButton>
         <Menu
           disableAutoFocus
@@ -63,11 +71,11 @@ const NavBar = (props) => {
           anchorEl={open}
           anchorOrigin={{
             vertical: "bottom",
-            horizontal: "right",
+            horizontal: "center",
           }}
           transformOrigin={{
             vertical: "top",
-            horizontal: "right",
+            horizontal: "center",
           }}
           keepMounted
           open={Boolean(open)}
