@@ -178,7 +178,7 @@ const SubscriberList = (props) => {
       });
       if (props.filter.date || props.filter.package) {
         tempTableData = tempTableData.filter((data) =>
-          data.package.includes(props.filter.package)
+          data.package.toLowerCase().includes(props.filter.package.toLowerCase())
         );
         tempTableData = tempTableData.filter((data) =>
           data.expiry.includes(props.filter.date)

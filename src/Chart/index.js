@@ -1,22 +1,9 @@
 import { Typography, Grid, Box } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import { PieChart, Pie, Legend, Cell, Tooltip } from "recharts";
+import subscriptions from "../data/subscriptions.json";
 
-const data = [
-  { name: "Plan 1", value: 2400 },
-  { name: "Plan 2", value: 4567 },
-  { name: "Plan 3", value: 1398 },
-  { name: "Plan 4", value: 9800 },
-  { name: "Plan 5", value: 3908 },
-  { name: "Plan 6", value: 4800 },
-  { name: "Plan 7", value: 2400 },
-  { name: "Plan 8", value: 4567 },
-  { name: "Plan 9", value: 1398 },
-  { name: "Plan 10", value: 9800 },
-  { name: "Plan 11", value: 3908 },
-  { name: "Plan 12", value: 4800 },
-  { name: "Plan Unlimited", value: 4800 },
-];
 
 const COLORS = [
   "#005FB1",
@@ -34,7 +21,30 @@ const COLORS = [
   "#4C4C4C",
 ];
 
-export default function Chart() {
+const Chart = (props) => {
+  const [subscriberData, setSubscriberData] = useState([]);
+  useEffect(() => {
+    let modifiedData = subscriptions.reduce((acc, val) => {
+      if (acc) {
+        let tempAcc = acc.find((a) => a.name === val.package);
+        if (tempAcc) {
+          acc = acc.map((a) => {
+            if (a.name === val.package) {
+              a.value += 1;
+            }
+            return a;
+          });
+          return acc;
+        } else {
+          acc.push({ name: val.package, value: 1 });
+          return acc;
+        }
+      }
+      return acc
+    }, []);
+    setSubscriberData(modifiedData)
+  }, []);
+
   return (
     <Box sx={{ pt: 3, minWidth: "350px" }}>
       <Grid container direction="column" alignItems="center">
@@ -49,14 +59,14 @@ export default function Chart() {
               alignmentBaseline="middle"
               dataKey="value"
               isAnimationActive={false}
-              data={data}
+              data={subscriberData}
               cx="57%"
               cy="50%"
               outerRadius={120}
               fill="#8884d8"
               label
             >
-              {data.map((entry, index) => (
+              {subscriberData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index]} />
               ))}
             </Pie>
@@ -67,4 +77,5 @@ export default function Chart() {
       </Grid>
     </Box>
   );
-}
+};
+export default Chart;

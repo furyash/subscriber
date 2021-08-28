@@ -15,12 +15,12 @@ const App = () => {
         alignItems="flex-start"
         justifyContent="center"
       >
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={12} sm={12} lg={4}>
           <Chart />
           <Divider />
         </Grid>
 
-        <Grid container direction="column" item xs={12} md={8}>
+        <Grid container direction="column" item xs={12}  md={12} lg={8}>
           <Grid>
             <NavBar setFilter={setFilter} />
           </Grid>
