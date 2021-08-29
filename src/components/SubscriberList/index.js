@@ -178,7 +178,9 @@ const SubscriberList = (props) => {
       });
       if (props.filter.date || props.filter.package) {
         tempTableData = tempTableData.filter((data) =>
-          data.package.toLowerCase().includes(props.filter.package.toLowerCase())
+          data.package
+            .toLowerCase()
+            .includes(props.filter.package.toLowerCase())
         );
         tempTableData = tempTableData.filter((data) =>
           data.expiry.includes(props.filter.date)
@@ -247,7 +249,7 @@ const SubscriberList = (props) => {
   }
   return (
     <TableContainer component={Paper}>
-      <Table>
+      <Table stickyHeader aria-label="sticky table">
         <TableHead>
           <TableRow>
             {headCells.map((headCell, index) => {
